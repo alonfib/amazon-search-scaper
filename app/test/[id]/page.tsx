@@ -1,5 +1,5 @@
 'use client';
-import { getAmazonHomePage } from '@/pages/api/amazon';
+import { getAmazonHomePage } from '@/app/pages/api/amazon';
 import { useEffect, useState } from 'react';
 
 export default function Test({}) {

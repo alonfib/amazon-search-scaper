@@ -1,4 +1,3 @@
-import { getAmazonHomePage } from '@/pages/api/amazon';
 import axios from 'axios';
 import { load } from 'cheerio';
 import { Builder, logging } from 'selenium-webdriver';
