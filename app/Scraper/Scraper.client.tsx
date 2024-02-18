@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import Button from "../components/Button/Button.client";
-import useSWR, { mutate } from "swr";
+import useSWR from "swr";
+import SuggestionsList from "../components/SuggestionsList";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const Scraper: React.FC = () => {
   const [shouldFetch, setShouldFetch] = useState(false);
-  const { data, error } = useSWR(shouldFetch ? "/api/amazon" : null, fetcher);
-  const isLoading = shouldFetch && !data && !error;
+  const { data, error, mutate } = useSWR(shouldFetch ? "/api/amazon" : null, fetcher);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleScraper = () => {
+  const handleScraper = async () => {
+    setIsLoading(true);
     setShouldFetch(true);
-    mutate("/api/amazon");
+    await mutate("/api/amazon");
   };
 
   return (
@@ -19,7 +21,7 @@ const Scraper: React.FC = () => {
       <Button label="Scrape" onClick={handleScraper} />
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
-      {data && <pre>{JSON.stringify(data.suggestions, null, 2)}</pre>}
+      {data && <SuggestionsList suggestions={data.suggestions as string[]}/>}
     </div>
   );
 };

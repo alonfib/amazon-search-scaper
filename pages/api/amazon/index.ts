@@ -1,5 +1,4 @@
-import React from "react";
-import puppeteer, { Browser, Page } from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const allLetters = [
@@ -55,44 +54,9 @@ const getSuggests = async (page: Page, letter: string) => {
     }
   }
 
-
-  // await new Promise((resolve) => setTimeout(resolve, 1000)); // Use setTimeout instead
   const filteredTexts = divTexts.filter((text) => typeof text === "string") as string[];
   return filteredTexts;
 };
-
-const getAllSuggestions = async () => {
-  const { page, browser } = await loginToAmazon();
-  let texts: string[] = [];
-
-  for (let letter of allLetters) {
-    const text = await getSuggests(page, letter);
-    texts = [...texts, ...text];
-    await new Promise((resolve) => setTimeout(resolve, 100)); // Wait 2 seconds before fetching the next set of suggestions
-  }
-
-  console.log(texts);
-  await browser.close();
-  return texts;
-};
-// const CurrentPage = async () => {
-//   console.log("fetch Data"); // Logs the number of 'a' elements on the page
-//   // const number = fetchData();
-//   const suggestion = await getAllSuggestions();
-//   console.log("fetch Data end"); // Logs the number of 'a' elements on the page
-//   re
-//   // return (  );
-// };
-
-// export default CurrentPage;
-
-// export default function handler(
-//   _req: NextApiRequest,
-//   res: NextApiResponse<{status: number}>,
-// ) {
-//   return res.status(200).json({status: 200});
-// }
-
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { page, browser } = await loginToAmazon();
@@ -101,7 +65,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   for (let letter of allLetters) {
     const text = await getSuggests(page, letter);
     texts = [...texts, ...text];
-    await new Promise((resolve) => setTimeout(resolve, 200)); // Wait 2 seconds before fetching the next set of suggestions
+    await new Promise((resolve) => setTimeout(resolve, 20)); // Wait 50 ms before fetching the next set of suggestions (to aviod bugs on collect data)
   }
 
   await browser.close();
