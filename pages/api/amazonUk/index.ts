@@ -31,7 +31,7 @@ const allLetters = [
 ];
 
 const loginToAmazonUk = async () => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true});
   const page = await browser.newPage();
   await page.goto("http://amazon.co.uk");
   await page.waitForSelector("#twotabsearchtextbox", { timeout: 30000 });
