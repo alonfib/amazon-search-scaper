@@ -1,5 +1,4 @@
 import React from 'react';
-import dynamic from 'next/dynamic';
 import Scrapper  from '@/app/Scraper/Scraper.client';
 
 export default function Home() {

@@ -30,10 +30,10 @@ const allLetters = [
   "z",
 ];
 
-const loginToAmazon = async () => {
+const loginToAmazonUk = async () => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto("http://amazon.com");
+  await page.goto("http://amazon.co.uk");
   await page.waitForSelector("#twotabsearchtextbox", { timeout: 30000 });
   return { browser, page };
 };
@@ -67,7 +67,7 @@ const getSuggests = async (page: Page, letter: string): Promise<Suggestions> => 
 };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { page, browser } = await loginToAmazon();
+  const { page, browser } = await loginToAmazonUk();
   let suggestions: Suggestions[] = [];
 
   for (let letter of allLetters) {
