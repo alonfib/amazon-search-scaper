@@ -101,7 +101,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   for (let letter of allLetters) {
     const text = await getSuggests(page, letter);
     texts = [...texts, ...text];
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // Wait 2 seconds before fetching the next set of suggestions
+    await new Promise((resolve) => setTimeout(resolve, 200)); // Wait 2 seconds before fetching the next set of suggestions
   }
 
   await browser.close();
