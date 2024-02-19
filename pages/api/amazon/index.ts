@@ -80,7 +80,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   for (let letter of [  ...allLetters]) {
     const newSuggestions = await getSuggests(page, letter);
     suggestions = [...suggestions, newSuggestions];
-    await new Promise((resolve) => setTimeout(resolve, 60)); // Wait 50 ms before fetching the next set of suggestions (to aviod bugs on collect data)
+    await new Promise((resolve) => setTimeout(resolve, 60)); // Wait 60 ms before fetching the next set of suggestions (to aviod bugs on collect data)
   }
 
   await browser.close();
