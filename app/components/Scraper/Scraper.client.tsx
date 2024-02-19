@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Button from "../components/Button/Button.client";
+import Button from "../Button/Button.client";
 import useSWR from "swr";
-import SuggestionsList, { Suggestions } from "../components/SuggestionsList/SuggestionsList";
+import SuggestionsList, { Suggestions } from "./innerComponents/SuggestionsList/SuggestionsList";
 import "./Scraper.scss";
-interface Data {
-  suggestions: Suggestions[];
-}
 
 const buttonData = [
   {
