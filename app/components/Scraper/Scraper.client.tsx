@@ -63,6 +63,8 @@ const Scraper: React.FC = () => {
 
   return (
     <div className="scraper-container">
+      {/* html tab title */}
+      <title>Amazon Scrapper</title> 
       <div className="header">
         <div className="title">Amazon Suggestions</div>
       </div>
