@@ -30,10 +30,10 @@ const allLetters = [
   "z",
 ];
 
-const loginToAmazon = async () => {
+const loginToAmazon = async (url = "http://amazon.com") => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
-  await page.goto("http://amazon.com");
+  await page.goto(url);
   await page.waitForSelector("#twotabsearchtextbox", { timeout: 30000 });
   return { browser, page };
 };
@@ -55,7 +55,7 @@ const getSuggests = async (page: Page, letter: string): Promise<Suggestions> => 
       (text) => typeof text === "string"
     ) as string[];
     if (divTexts.length > 0) {
-      isGood = divTexts.every((text) => text[0] === letter);
+      isGood = divTexts.some((text) => text[0] === letter);
     } else {
       isGood = true;
     }
@@ -66,14 +66,21 @@ const getSuggests = async (page: Page, letter: string): Promise<Suggestions> => 
   return { title: letter, items: filteredTexts };
 };
 
+type handleQuary = {
+  url?: string;
+  search?: string;
+};
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { page, browser } = await loginToAmazon();
+  const { url = "" } = req.query as handleQuary;
+  const { page, browser } = await loginToAmazon(url);
+
   let suggestions: Suggestions[] = [];
 
-  for (let letter of allLetters) {
+  for (let letter of [  ...allLetters]) {
     const newSuggestions = await getSuggests(page, letter);
     suggestions = [...suggestions, newSuggestions];
-    await new Promise((resolve) => setTimeout(resolve, 20)); // Wait 50 ms before fetching the next set of suggestions (to aviod bugs on collect data)
+    await new Promise((resolve) => setTimeout(resolve, 60)); // Wait 50 ms before fetching the next set of suggestions (to aviod bugs on collect data)
   }
 
   await browser.close();

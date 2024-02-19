@@ -1,5 +1,5 @@
 import React from 'react';
-import Scrapper  from '@/app/Scraper/Scraper.client';
+  import Scrapper  from '@/app/Scraper/Scraper.client';
 
 export default function Home() {
   return (

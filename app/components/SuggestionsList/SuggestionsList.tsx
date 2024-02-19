@@ -1,5 +1,6 @@
 import React from "react";
-import Suggestion from "./Suggestion";
+import Suggestion from "../Suggestion/Suggestion";
+import "./SuggestionsList.scss";
 
 export interface Suggestions {
   title: string;
@@ -12,17 +13,12 @@ interface SuggestionsListProps {
 
 const SuggestionsList: React.FC<SuggestionsListProps> = ({ suggestionsList = []}) => {
   return (
-    <div className="suggstions-list-container" style={{
-      display: "flex",
-      padding: "20px",
-      flexWrap: "wrap",
-    
-    }}>
+    <div className="suggstions-list-container">
       {suggestionsList.map((suggestions, index) => (
-        <div className="suggestions" key={index} style={{minWidth: '20%', flex: 1}}>
-          <h3 className="suggestions-title" style={{textAlign: 'center'}}>{suggestions.title}</h3>
+        <div className="suggestions" key={index}>
+          <h3 className="suggestions-title">{suggestions.title}</h3>
           {suggestions.items.map((item, index) => (
-            <Suggestion key={index} label={item} />
+            <Suggestion key={index} label={`${index + 1}) ${item}`} />
           ))}
         </div>
       ))}

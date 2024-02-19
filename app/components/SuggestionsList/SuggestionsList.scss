@@ -1,0 +1,20 @@
+.suggstions-list-container {
+  display: flex;
+  padding: 20px;
+  flex-wrap: wrap;
+
+  .suggestions {
+    min-width: 20%;
+    flex: 1;
+    margin: 8px 16px;
+  }
+
+  .suggestions-title {
+    text-align: center;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #7066f1;
+    box-shadow: -2px 3px 1px 1px #7066f130;
+    border-left: 1px solid #7066f1;
+    border-bottom-left-radius: 4px;
+  }
+}

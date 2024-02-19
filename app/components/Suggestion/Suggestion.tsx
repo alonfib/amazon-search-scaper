@@ -1,4 +1,5 @@
 import React from "react";
+import "./Suggestion.scss";
 
 interface SuggestionProps {
   label: string;
@@ -6,7 +7,7 @@ interface SuggestionProps {
 
 const Suggestion: React.FC<SuggestionProps> = ({ label }) => {
   return (
-    <div className="suggestion" style={{  color: "black" }}>
+    <div className="suggestion">
       {label}
     </div>
   );
