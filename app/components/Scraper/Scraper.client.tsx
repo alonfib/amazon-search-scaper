@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Button from "../Button/Button.client";
 import useSWR from "swr";
 import SuggestionsList, { Suggestions } from "./innerComponents/SuggestionsList/SuggestionsList";

@@ -1,4 +1,4 @@
-import puppeteer, { Browser, Page } from "puppeteer";
+import puppeteer, { Page } from "puppeteer";
 import { NextApiRequest, NextApiResponse } from "next";
 
 const allLetters = [
