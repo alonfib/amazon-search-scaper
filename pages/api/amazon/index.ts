@@ -31,7 +31,7 @@ const allLetters = [
 ];
 
 const loginToAmazon = async (url = "http://amazon.com") => {
-  const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto(url);
   await page.waitForSelector("#twotabsearchtextbox", { timeout: 30000 });
@@ -49,15 +49,15 @@ const getSuggests = async (page: Page, letter: string): Promise<Suggestions> => 
   await page.type("#twotabsearchtextbox", letter);
   await page.waitForSelector(".s-suggestion-container", { timeout: 1000 });
   let divTexts: string[] = [];
-  let isGood = false;
-  while (!isGood) {
+  let sugestionsUpdated = false;
+  while (!sugestionsUpdated) {
     divTexts = (await page.$$eval(".s-suggestion", (elements) => elements.map((element) => element.textContent))).filter(
       (text) => typeof text === "string"
     ) as string[];
     if (divTexts.length > 0) {
-      isGood = divTexts.some((text) => text[0] === letter);
+      sugestionsUpdated = divTexts.some((text) => text[0] === letter);
     } else {
-      isGood = true;
+      sugestionsUpdated = true;
     }
   }
 

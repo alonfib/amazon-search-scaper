@@ -3,11 +3,13 @@ import './Button.scss';
 interface ButtonProps {
   onClick?: () => void;
   label: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, label }) => {
+const Button: React.FC<ButtonProps> = ({ onClick, label, className = '' , style}) => {
   return (
-    <button onClick={onClick} className="common-client-button">
+    <button onClick={onClick} className={`${className} common-client-button`} style={style}>
       {label}
     </button>
   );
