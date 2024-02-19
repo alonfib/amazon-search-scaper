@@ -12,6 +12,11 @@ You should now be able to see the result of the app in your browser.
 
 
 
-## Note
+## Important Information
 
-If you want to hide the Chrome browser during scraping, you can go to `pages/api/amazon/index.ts`, find the `loginToAmazon` function, and set `{headless: true}`.
+During the development of this scraper, the Chrome browser was intentionally made visible to handle occasional CAPTCHA challenges.
+
+If you prefer to run the scraper in the background, you can modify the Puppeteer settings to operate in headless mode. To do this, navigate to `pages/api/amazon/index.ts`, locate the `loginToAmazon` function, and set the `headless` option to `true` as shown below:
+
+```typescript
+const browser = await puppeteer.launch({ headless: true });
